@@ -5,13 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbcc937b-eac5-4804-b9b6-fc3155047ae1" name="Changes" comment="initial commit">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/icon-button/icon-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/icon-button/loader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helpers/input-validation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helpers/parse-description.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/app/App.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/backend-api-service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ai-footer/ai-footer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/context-provider/app-context-provider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/prompt-layout/prompt-layout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/app/App.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/prompt-layout/prompt-layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/select-column.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/select-group.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/text-input-with-send/text-input-with-send.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/text-input-with-send/text-input-with-send.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/text-input-with-tags/text-input-with-tags.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icon-button/icon-button.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/text-input-with-tags/text-input-with-tags.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/basic-prompt-layout/prompt-layout.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/basic-prompt-layout/prompt-layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/context-explorer/context-explorer-example.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/context-explorer/context-explorer-example.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/livestream-example/boilerplate.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/livestream-example/final-code.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/livestream-example/styles.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/prompt-with-column-mapping/prompt-with-column-mapping.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/prompt-with-column-mapping/prompt-with-column-mapping.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+        <option value="CSS File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,16 +70,23 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/bilalmustafa/Documents/Auracle",
+    "last_opened_file_path": "/Users/bilalmustafa/Documents/Auracle/src/components/icon-button",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "http.proxy",
+    "settings.editor.selected.configurable": "Console",
+    "ts.external.directory.path": "/Users/bilalmustafa/Documents/Auracle/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/icon-button" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />

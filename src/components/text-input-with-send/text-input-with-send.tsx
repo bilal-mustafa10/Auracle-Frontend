@@ -1,151 +1,60 @@
-import dynamic from 'next/dynamic';
-import React, { ChangeEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
-
-const IconButton = dynamic(() => 
-  import('monday-ui-react-core')
-    .then((mod) => mod.IconButton), {
-  ssr: false,
-})
-const Loader = dynamic(() => 
-  import('monday-ui-react-core')
-    .then((mod) => mod.Loader), {
-  ssr: false,
-})
-import { Send } from 'monday-ui-react-core/icons';
-
+import React, { ChangeEvent, useCallback, useState, useEffect } from 'react';
+import IconButton from '../icon-button/icon-button';
+import Loader from '../icon-button/loader';
 import classes from './text-input-with-send.module.scss';
-
-import { Modes } from '../../types/layout-modes';
-import { isEnterWithControlKey } from '../../helpers/dom-events';
-
-import {showErrorMessage} from '@/helpers/monday-actions'
-
-const ERROR_TIMEOUT = 3000;
-
-const isValidInput = (input: string): boolean => {
-  return input.trim().length > 0;
-};
+import { isValidInput } from '@/helpers/input-validation';
 
 type Props = {
-  error?: string;
-  mode: Modes;
-  setMode(mode: Modes): void;
-
-  /**
-   * This method is called when the user presses send
-   * @param userMessage Contents of the input text box
-   */
-  onSend(userMessage: string): void;
-  initialInputValue?: string;
-  loading: boolean;
-  success: boolean;
-  inputRows?: number;
+    error?: string;
+    onSend(userMessage: string): void;
+    loading: boolean;
+    success: boolean;
 };
 
-const TextInputWithSend = ({
-  error,
-  mode,
-  setMode,
-  onSend,
-  initialInputValue = '',
-  loading,
-  success,
-}: Props): JSX.Element => {
-  const [inputValue, setInputValue] = useState<string>(initialInputValue);
-  const [inputElHeight, setInputElHeight] = useState<number>();
+const TextInputWithSend = ({error, onSend, loading, success,}: Props): JSX.Element => {
+    const [inputValue, setInputValue] = useState<string>('');
+    const canSendInput = !loading && isValidInput(inputValue);
 
-  const canSendInput = !loading && isValidInput(inputValue);
+    const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setInputValue(event.currentTarget.value ?? '');
+    };
 
-  const content = useRef<HTMLTextAreaElement>(null);
+    const resetInput = useCallback(() => {
+        setInputValue('');
+    }, []);
 
-  const focusInputContent = useCallback(() => {
-    const textAreaElement = content?.current;
-    if (!textAreaElement) {
-      return;
-    }
-    textAreaElement.focus();
-    textAreaElement.setSelectionRange(textAreaElement.value.length, textAreaElement.value.length);
-  }, []);
+    const handleOnSend = useCallback(() => {
+        if (canSendInput) {
+            onSend(inputValue);
+            resetInput();
+        }
+    }, [canSendInput, inputValue, onSend, resetInput]);
 
-  // BUG: make input become smaller when user deletes content
-  const handleInputChange = useCallback((newValue: string) => {
-    setInputElHeight(content.current?.scrollHeight);
-    setInputValue(newValue);
-  }, []);
+    // show error message when error occurs
+    useEffect(() => {
+        if (error) {
+            console.error(error);
+        }
+    }, [error]);
 
-  useEffect(() => {
-    handleInputChange(inputValue);
-    focusInputContent();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    handleInputChange(event.currentTarget.value ?? '');
-  };
-
-  const resetInput = useCallback(() => {
-    setInputValue('');
-    setInputElHeight(undefined);
-  }, [setInputValue, setInputElHeight]);
-
-  const handleOnSend = useCallback(() => {
-    if (canSendInput) {
-      onSend(inputValue);
-    }
-  }, [canSendInput, inputValue, onSend]);
-
-  const onKeyDown = useCallback(
-    (event: SyntheticEvent<HTMLTextAreaElement, KeyboardEvent>) => {
-      const shouldSubmit = isEnterWithControlKey(event.nativeEvent);
-
-      if (shouldSubmit) {
-        handleOnSend();
-      }
-    },
-    [handleOnSend]
-  );
-
-  useEffect(() => {
-    if (error && mode === Modes.response) {
-      console.error('err:', error);
-      showErrorMessage(`Something went wrong: ${error}`, ERROR_TIMEOUT);
-      setMode(Modes.request);
-    }
-  }, [error, mode, setMode]);
-
-  useEffect(() => {
-    if (success) {
-      resetInput();
-    }
-  }, [success, resetInput])
-
-  return (
-    <div className={classes.inputContainer}>
-      <textarea
-        className={classes.input}
-        rows={1}
-        ref={content}
-        placeholder={'Write your prompt here...'}
-        value={inputValue}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        style={{ height: inputElHeight ? `${inputElHeight}px` : 'auto' }}
-      />
-      <div className={classes.loaderContainer}>
-      {(mode===Modes.response) ? <Loader size={24}/> : null}
-      </div>
-        <IconButton
-          ariaLabel="Send"
-          className={classes.sendButton}
-          size={'small'}        
-          kind={'primary'}
-          icon={Send}
-          onClick={handleOnSend}
-          wrapperClassName={classes.sendButtonWrapper}
-          disabled={!canSendInput}
-        />
-    </div>
-  );
+    return (
+        <div className={classes.inputContainer}>
+            {error && <div className={classes.error}>{error}</div>}
+            <textarea
+                className={classes.input}
+                placeholder={'Write your prompt here...'}
+                value={inputValue}
+                onChange={onChange}
+            />
+            <div className={classes.loaderContainer}>
+                {loading && <Loader />}
+            </div>
+            <IconButton
+                onClick={handleOnSend}
+                disabled={!canSendInput}
+            />
+        </div>
+    );
 };
 
 export default TextInputWithSend;
