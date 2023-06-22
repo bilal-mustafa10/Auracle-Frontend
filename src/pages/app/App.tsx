@@ -1,82 +1,145 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import mondaySdk from 'monday-sdk-js';
-import {getSoftwarePlan, PlanData} from "@/services/backend-api-service";
-import {addBlocksToDoc} from "@/services/api";
+import {getSoftwarePlan, PlanData, postRe} from "@/services/backend-api-service";
+import {addBlocksToDoc, createDoc, createFolder, getDocId} from "@/services/api";
+import { Checkbox, Loader, Button } from "monday-ui-react-core";
+import useFormattedText, { Sections } from "@/helpers/parse-description";
+import "./App.scss";
 
 const monday = mondaySdk();
 
 const App: React.FC = () => {
-    const [projectDescription, setProjectDescription] = useState<string | null>(null);
+    const [input, setInput] = useState<string | null>(null);
+    const projectDescription = useFormattedText(input);
     const [softwarePlan, setSoftwarePlan] = useState<PlanData | null>(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
+    const [checkedItems, setCheckedItems] = useState<{[key: string]: boolean}>({});
+    const [workspaceId, setWorkspaceId] = useState<number | null>(null);
 
-
-
-    /*const getDocumentData = useCallback(async () => {
-        const query = "query { docs (ids: 398114, limit: 1) { id object_id settings created_by { id name }}}";
-        const data = await fetchDocumentData(query);
-        console.log(data);
-    }, []);*/
-
-    /*useEffect(() => {
-        getDocumentData();
-    }, [getDocumentData]);*/
+    const fetchSoftwarePlan = useCallback(async () => {
+        if (projectDescription) {
+            try {
+                setLoading(true);
+                const softwarePlanData = await getSoftwarePlan(projectDescription);
+                setSoftwarePlan(softwarePlanData.answer);
+                setLoading(false);
+            } catch (err: any) {
+                setLoading(false);
+                setError(err.message);
+            }
+        }
+    }, [projectDescription]);
 
     useEffect(() => {
         monday.listen("context", (res: any) => {
-            console.log(res.data.input);
-            //setProjectDescription(parseProjectDescription(res.data.input));
-            setProjectDescription(res.data.input);
-            // setDocId(res.data.docId);
-            //setSessionToken(res.data.sessionToken);
+            const inputData = res.data.input;
+            if (inputData) {
+                setInput(inputData);
+                console.log('input', inputData);
+                console.log('workspace_id', res.data.workspaceId);
+                setWorkspaceId(res.data.workspaceId)
+            }
         });
     }, []);
 
     useEffect(() => {
-        if (projectDescription) {
-            const fetchSoftwarePlan = async () => {
-                try {
-                    setLoading(true);
-                    const softwarePlanData = await getSoftwarePlan(projectDescription);
-                    setSoftwarePlan(softwarePlanData.answer);
-                    setLoading(false);
-
-                    const blocksData = [
-                        { type: 'normal text', title: 'Context', content: softwarePlanData.answer.context },
-                        { type: 'normal text', title: 'Project Plan', content: softwarePlanData.answer.project_plan },
-                        { type: 'normal text', title: 'Requirements USPs', content: softwarePlanData.answer.requirements_USPs },
-                        { type: 'normal text', title: 'Requirements Details', content: softwarePlanData.answer.requirements_details },
-                        { type: 'normal text', title: 'Risk Assessment', content: softwarePlanData.answer.risk_assessment }
-                    ];
-
-                    await addBlocksToDoc(blocksData);
-                } catch (err: any) {
-                    setLoading(false);
-                    setError(err.message);
-                }
-            };
-
+        if (projectDescription && softwarePlan === null) {
+            console.log('fetching software plan')
             fetchSoftwarePlan();
         }
-    }, [projectDescription]);
+    }, [projectDescription, fetchSoftwarePlan]);
 
+    const handleInsertClick = async () => {
+        const blocksData = Object.entries(checkedItems).reduce((blocks, [key, isChecked]) => {
+            if (isChecked) {
+                console.log(key, softwarePlan![key as keyof PlanData]);
+                blocks.push({
+                    title: key,
+                    content: softwarePlan![key as keyof PlanData]
+                });
+            }
+            return blocks;
+        }, [] as {title: string, content: string}[]);
+
+        const idea= projectDescription?.idea
+
+        const folderId = await createFolder(`${idea} Software Plan`, workspaceId as number);
+
+        if (folderId === null) {
+            setError('Error creating folder')
+            return;
+        }
+
+        console.log('blocksData', blocksData);
+
+        blocksData.map(async (block) => {
+            const docId = await createDoc(block.title, folderId)
+            if (docId === null) {
+                setError('Error creating doc')
+                return;
+            }
+
+            const objectId = await getDocId(docId)
+
+            if (objectId === null) {
+                setError('Error getting object id')
+                return;
+            }
+
+            await addBlocksToDoc(block, objectId)
+        })
+
+        return;
+
+    };
+
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCheckedItems({...checkedItems, [event.target.name]: event.target.checked});
+    };
+
+    const renderContent = () => {
+        if (loading) {
+            return (
+                <div className="loading-container">
+                    <Loader size={Loader.sizes.XS} className="loading-spinner" />
+                    <h4 className="loading-text">Generating software plan...</h4>
+                </div>
+            );
+        }
+
+        if (error) {
+            return <div className="error-message">Error: {error}</div>;
+        }
+
+        if (softwarePlan) {
+            return (
+                <div className="software-plan">
+                    {Object.keys(softwarePlan).map(item => (
+                        <div className="checkbox-container" key={item}>
+                            <label className="checkbox-label">
+                                {item}
+                                <Checkbox
+                                    className="checkbox-item"
+                                    name={item}
+                                    defaultChecked={checkedItems[item]}
+                                    onChange={handleCheckboxChange}
+                                />
+                            </label>
+                        </div>
+                    ))}
+                    <Button className="insert-button" onClick={handleInsertClick}>Generate a document folder</Button>
+                </div>
+            );
+        }
+
+        return null;
+    };
 
     return (
         <div className="main">
-            {loading ? (
-                <div>Loading...</div> // replace this with your spinner
-            ) : error ? (
-                <div>Error: {error}</div>
-            ) : softwarePlan ? (
-                <div>
-                    <h1>{softwarePlan.context}</h1>
-                    <p>{softwarePlan.project_plan}</p>
-                    <p>{softwarePlan.requirements_USPs}</p>
-                    <p>{softwarePlan.requirements_details}</p>
-                    <p>{softwarePlan.risk_assessment}</p>
-                </div>
-            ) : null}
+            <h2 className="header">Software Plan</h2>
+            {renderContent()}
         </div>
     );
 };

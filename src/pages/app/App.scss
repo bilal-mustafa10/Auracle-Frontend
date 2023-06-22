@@ -1,34 +1,111 @@
+:root {
+  --main-bg-color: #F7F9FC;
+  --secondary-color: #5c6ac4;
+  --error-color: #f96332;
+  --main-font: 'Arial', sans-serif;
+  --light-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: var(--main-font);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--main-bg-color);
+  transition: all 0.3s ease-in-out;
+}
+
 .main {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  justify-content: flex-end;
-  margin: 12px;
+  align-items: center;
+  width: 80%; /* To make it responsive */
+  max-width: 450px;
+  height: 70vh;
+  max-height: 320px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: var(--light-shadow);
+  transition: all 0.3s ease-in-out;
 }
 
-.footer {
-  font-family: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
-  font-size: 14px;
+.header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.loading-container,
+.error-message {
   display: flex;
-  flex-direction: row;
-  // justify-content: left;
-  // border-top: 1px;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  flex: 1;
+  transition: all 0.3s ease-in-out;
 }
 
-.columnsDropdown {
-  max-height: 24px;
-  // padding: 4px;
-  margin-bottom: 6px;
+.loading-text {
+  animation: changeColor 1s infinite;
+  color: var(--secondary-color);
 }
 
-.groupsDropdown {
-  max-height: 24px;
-  // padding: 4px;
-  margin-top: 6px;
+.error-message {
+  color: var(--error-color);
+  font-weight: bold;
+  text-align: center;
 }
 
-.columnsDropdownMenuWrapper {
- max-height: 24px; 
+.software-plan {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0rem;
+  width: 100%;
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkbox-container,
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkbox-item {
+  margin-left: auto;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.insert-button {
+  align-self: center;
+  margin-top: 2rem;
+  background: var(--secondary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.insert-button:hover {
+  background: var(--secondary-color);
+}
+
+@keyframes changeColor {
+  0% { color: var(--secondary-color); }
+  50% { color: var(--secondary-color); }
+  100% { color: var(--secondary-color); }
 }

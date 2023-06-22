@@ -1,7 +1,7 @@
-import {ProjectInfo} from "@/helpers/parse-description";
+import {Sections} from "@/helpers/parse-description";
 import axios, { AxiosResponse } from 'axios';
 
-const baseURL = "https://4b84-62-252-209-93.ngrok-free.app/api/"
+const baseURL = "https://1925-212-161-126-135.ngrok-free.app/api/"
 
 const api = axios.create({
     baseURL: baseURL,
@@ -48,10 +48,20 @@ export const checkConnection = async () => {
     }
 }
 
-export const getSoftwarePlan = async (query: ProjectInfo | string) => {
+export const getSoftwarePlan = async (query: Sections) => {
+
     const data = {
-        "context": query
+        "idea": query['idea'],
+        "problemDefinition": query['Problem definition'],
+        "metricsAndGoals": query['Metrics and goals'],
+        "targetAudience": query['Target audience/personas'],
+        "constraints": query['Constraints'],
+        "solutionOverview": query['Solution overview']
     }
+
+
+    console.log('query: ', data)
+
     try {
         const response: AxiosResponse<ResponseData> = await api.post('plan', data);
         console.log('response: ', response);
@@ -61,3 +71,25 @@ export const getSoftwarePlan = async (query: ProjectInfo | string) => {
         throw error;
     }
 };
+
+
+export const postRe = async (requriements: string, plan: string) => {
+
+    const data = {
+        "requirements_USPs": requriements,
+        "project_plan": plan,
+    }
+
+
+    console.log('query: ', data)
+
+    try {
+        const response = await api.post('agent_monday', data);
+        console.log('response: ', response);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+

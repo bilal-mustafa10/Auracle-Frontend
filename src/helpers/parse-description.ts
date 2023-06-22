@@ -1,35 +1,43 @@
-export type ProjectInfo = {
-    idea: string,
-    problemDefinition: string,
-    metricsAndGoals: string,
-    targetAudience: string,
-    constraints: string,
-    solutionOverview: string
-}
+import { useState, useEffect } from 'react';
 
-export function parseProjectDescription(description: string): ProjectInfo {
-    const sections = ['project idea', 'problem definition', 'metrics and goals', 'target audience/personas', 'constraints', 'solution overview'];
-    const descriptionLowered = description.toLowerCase();
-    const projectInfo: ProjectInfo = {
-        idea: "",
-        problemDefinition: "",
-        metricsAndGoals: "",
-        targetAudience: "",
-        constraints: "",
-        solutionOverview: ""
-    }
+export type Sections = {
+    idea: string;
+    'Problem definition': string;
+    'Metrics and goals': string;
+    'Target audience/personas': string;
+    'Constraints': string;
+    'Solution overview': string;
+};
 
-    for(let i = 0; i < sections.length - 1; i++) {
-        const start = descriptionLowered.indexOf(sections[i]) + sections[i].length;
-        const end = descriptionLowered.indexOf(sections[i + 1]);
-        const content = description.substring(start, end).trim();
+const useFormattedText = (text: string | null) => {
+    const [formattedText, setFormattedText] = useState<Sections | null>(null);
 
-        projectInfo[sections[i].replace(/ /g, '') as keyof ProjectInfo] = content;
-    }
+    useEffect(() => {
 
-    // handle the last section separately as it extends to the end of the text
-    const lastSectionStart = descriptionLowered.indexOf(sections[sections.length - 1]) + sections[sections.length - 1].length;
-    projectInfo[sections[sections.length - 1].replace(/ /g, '') as keyof ProjectInfo] = description.substring(lastSectionStart).trim();
+        if (text === null) return;
 
-    return projectInfo;
-}
+        const headers = ['Problem definition', 'Metrics and goals', 'Target audience/personas', 'Constraints', 'Solution overview'];
+        const sections: Partial<Sections> = {};
+
+        let currentHeader: keyof Sections = 'idea';
+        let currentContent = '';
+        text.split('\n').forEach(line => {
+            if (headers.includes(line.trim())) {
+                if (currentContent) {
+                    sections[currentHeader] = currentContent.trim();
+                }
+                currentHeader = line.trim() as keyof Sections;
+                currentContent = '';
+            } else if (line.trim() !== '') {
+                currentContent += line + '\n';
+            }
+        });
+        sections[currentHeader] = currentContent.trim(); // Save the last section
+
+        setFormattedText(sections as Sections);
+    }, [text]);
+
+    return formattedText;
+};
+
+export default useFormattedText;

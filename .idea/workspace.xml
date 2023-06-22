@@ -4,35 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cbcc937b-eac5-4804-b9b6-fc3155047ae1" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/src/components/icon-button/icon-button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/icon-button/loader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/helpers/input-validation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/helpers/parse-description.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/app/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/backend-api-service.ts" afterDir="false" />
+    <list default="true" id="cbcc937b-eac5-4804-b9b6-fc3155047ae1" name="Changes" comment="integrate with backend">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ai-footer/ai-footer.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/context-provider/app-context-provider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/prompt-layout/prompt-layout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/app/App.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/prompt-layout/prompt-layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/select-column.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/select-group.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/text-input-with-send/text-input-with-send.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/text-input-with-send/text-input-with-send.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/text-input-with-tags/text-input-with-tags.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/icon-button/icon-button.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/text-input-with-tags/text-input-with-tags.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/basic-prompt-layout/prompt-layout.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/basic-prompt-layout/prompt-layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/context-explorer/context-explorer-example.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/context-explorer/context-explorer-example.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/livestream-example/boilerplate.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/livestream-example/final-code.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/livestream-example/styles.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/prompt-with-column-mapping/prompt-with-column-mapping.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/prompt-with-column-mapping/prompt-with-column-mapping.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/parse-description.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/parse-description.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/app/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/app/App.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/app/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/app/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/backend-api-service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/backend-api-service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,25 +43,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/bilalmustafa/Documents/Auracle/src/components/icon-button",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Console",
-    "ts.external.directory.path": "/Users/bilalmustafa/Documents/Auracle/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/bilalmustafa/Documents/Auracle/src/components/icon-button&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Console&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/bilalmustafa/Documents/Auracle/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/icon-button" />
@@ -115,6 +95,7 @@
       <workItem from="1687338446885" duration="2782000" />
       <workItem from="1687341892233" duration="514000" />
       <workItem from="1687342410181" duration="481000" />
+      <workItem from="1687425586331" duration="20819000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1687340456891</created>
@@ -151,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687342866697</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="integrate with backend">
+      <created>1687397576177</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687397576177</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +149,7 @@
     <MESSAGE value="update template" />
     <MESSAGE value="delete all" />
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="integrate with backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="integrate with backend" />
   </component>
 </project>
