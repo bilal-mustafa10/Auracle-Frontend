@@ -1,3 +1,7 @@
+# Before you go any further 
+## You are currently viewing front-end repository.
+## For back end, go to https://github.com/sethupavan12/hackathon_monday_backend
+
 # Before you begin
 
 This is a template app to help developers get started building for the monday AI Assistant. It's a preview, so things may not work as expected. This code will eventually live in the [official monday example apps repo.](https://github.com/mondaycom/welcome-apps/)
